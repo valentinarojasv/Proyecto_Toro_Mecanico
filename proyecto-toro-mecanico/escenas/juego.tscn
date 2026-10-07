@@ -4,23 +4,39 @@
 [ext_resource type="Texture2D" uid="uid://feka5qllcbp8" path="res://sprites/Toro.png" id="1_mf1lf"]
 [ext_resource type="Script" uid="uid://ot6ed3s2fvh7" path="res://scripts/juego.gd" id="1_t4q8c"]
 [ext_resource type="Texture2D" uid="uid://dd37wtyd2llim" path="res://sprites/Vquero.png" id="1_v0a8y"]
+[ext_resource type="Texture2D" uid="uid://bh3akydb082iu" path="res://sprites/Arena de Rodeo.png" id="2_qnwci"]
 
-[node name="Juego" type="Node2D" unique_id=1779799930]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y041h"]
+bg_color = Color(0.16134056, 0.5931518, 0.22767705, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kso0"]
+bg_color = Color(0.9490196, 0.1764706, 0.13333334, 1)
+
+[node name="Juego" type="Node2D" unique_id=1779799930 node_paths=PackedStringArray("barra_equilibrio", "texto_qte", "temporizador_qte", "espera_qte")]
 script = ExtResource("1_t4q8c")
+barra_equilibrio = NodePath("Interfaz/BarraEqulibrio")
+texto_qte = NodePath("Interfaz/QTE")
+temporizador_qte = NodePath("TemporizadorQTE")
+espera_qte = NodePath("EsperarQTE")
+
+[node name="Fondo" type="Sprite2D" parent="." unique_id=1536753282]
+position = Vector2(642, 358.99997)
+scale = Vector2(0.7649522, 0.75664186)
+texture = ExtResource("2_qnwci")
 
 [node name="Montura" type="Node2D" parent="." unique_id=1619383884]
 
 [node name="Toro" type="Node2D" parent="Montura" unique_id=478718453]
 
 [node name="Peronaje" type="Sprite2D" parent="Montura/Toro" unique_id=242632547]
-position = Vector2(635, 421)
-scale = Vector2(0.3006329, 0.32630518)
+position = Vector2(669, 380)
+scale = Vector2(0.2813291, 0.30070278)
 texture = ExtResource("1_mf1lf")
 
 [node name="Jinete" type="Node2D" parent="Montura" unique_id=356794718]
 
 [node name="Personaje" type="Sprite2D" parent="Montura/Jinete" unique_id=1163399068]
-position = Vector2(598, 282)
+position = Vector2(648, 249)
 scale = Vector2(0.27806857, 0.29643485)
 texture = ExtResource("1_v0a8y")
 
@@ -28,46 +44,70 @@ texture = ExtResource("1_v0a8y")
 
 [node name="BarraEqulibrio" type="ProgressBar" parent="Interfaz" unique_id=2108493935]
 anchors_preset = -1
-anchor_left = 0.439
-anchor_top = 0.836
-anchor_right = 0.512
-anchor_bottom = 0.87600005
-offset_left = 0.079956055
-offset_top = 0.079956055
-offset_right = 0.6399536
-offset_bottom = -1.7200317
+anchor_left = 0.42000002
+anchor_top = 0.82100004
+anchor_right = 0.578
+anchor_bottom = 0.869
+offset_left = 0.39996338
+offset_top = -0.12005615
+offset_right = 0.15997314
+offset_bottom = -7.6799927
 theme_override_fonts/font = ExtResource("1_dayui")
+theme_override_font_sizes/font_size = 27
+theme_override_styles/fill = SubResource("StyleBoxFlat_y041h")
 step = 1.0
 value = 100.0
+show_percentage = false
 
 [node name="Puntuacion" type="Label" parent="Interfaz" unique_id=1338133724]
 anchors_preset = -1
-anchor_left = 0.71900004
-anchor_top = 0.060000002
-anchor_right = 0.859
-anchor_bottom = 0.14600001
-offset_left = -0.32006836
-offset_top = -0.20000076
-offset_right = 0.47998047
-offset_bottom = 14.87999
+anchor_left = 0.42200002
+anchor_top = 0.028
+anchor_right = 0.59000003
+anchor_bottom = 0.135
+offset_left = -0.16003418
+offset_top = -0.15999985
+offset_right = -0.20007324
+offset_bottom = -0.20000458
 theme_override_fonts/font = ExtResource("1_dayui")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 30
 text = "Puntuación: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="QTE" type="Label" parent="Interfaz" unique_id=1367768045]
 anchors_preset = -1
-anchor_left = 0.74700004
-anchor_top = 0.157
-anchor_right = 0.837
-anchor_bottom = 0.18900001
-offset_left = -7.160034
-offset_top = -3.040001
-offset_right = -0.35998535
-offset_bottom = -0.08000183
+anchor_left = 0.080000006
+anchor_top = 0.507
+anchor_right = 0.30100003
+anchor_bottom = 0.619
+offset_left = -0.40000916
+offset_top = -0.040008545
+offset_right = -0.2800293
+offset_bottom = 0.3199768
 theme_override_fonts/font = ExtResource("1_dayui")
-theme_override_font_sizes/font_size = 20
-text = "Presiona  A"
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_4kso0")
+text = "Presiona la letra"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Interfaz" unique_id=764706611]
+offset_left = 568.0
+offset_top = 585.0
+offset_right = 713.0
+offset_bottom = 624.0
+theme_override_fonts/font = ExtResource("1_dayui")
+theme_override_font_sizes/font_size = 22
+text = "Equilibrio"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TemporizadorQTE" type="Timer" parent="." unique_id=1105957363]
+wait_time = 1.6
+one_shot = true
+
+[node name="EsperarQTE" type="Timer" parent="." unique_id=1476981778]
+wait_time = 1.7999999999999998
+one_shot = true
+autostart = true
